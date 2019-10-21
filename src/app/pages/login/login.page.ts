@@ -21,7 +21,7 @@ export class LoginPage implements OnInit {
     public alertCtrl: AlertController,
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
-    private mainService: MainService
+    public mainService: MainService
   ) { }
 
   ionViewWillEnter() {

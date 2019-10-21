@@ -11,7 +11,7 @@ export class SearchFilterPage implements OnInit {
   public radiusmiles = 1;
 
 
-  constructor(private modalCtrl: ModalController, private mainService: MainService) { }
+  constructor(private modalCtrl: ModalController, public mainService: MainService) { }
 
   ngOnInit() {
   }

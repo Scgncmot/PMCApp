@@ -37,7 +37,8 @@ export class RegisterPage implements OnInit {
     nombre:"",
     email:"",
     password:"",
-    deportes:[]
+    deportes:[],
+    username:''
   }
   
   constructor(
@@ -45,7 +46,7 @@ export class RegisterPage implements OnInit {
     public menuCtrl: MenuController,
     public loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
-    private maninService: MainService
+    public maninService: MainService
   ) { }
 
   ionViewWillEnter() {

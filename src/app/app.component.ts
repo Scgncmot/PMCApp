@@ -21,7 +21,7 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public navCtrl: NavController,
-    private mainService: MainService
+    public mainService: MainService
   ) {
     this.appPages = [
       {
