@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'app-search-filter',
@@ -8,17 +9,15 @@ import { ModalController } from '@ionic/angular';
 })
 export class SearchFilterPage implements OnInit {
   public radiusmiles = 1;
-  public minmaxprice = {
-    upper: 500,
-    lower: 10
-  };
 
-  constructor(private modalCtrl: ModalController) { }
+
+  constructor(private modalCtrl: ModalController, private mainService: MainService) { }
 
   ngOnInit() {
   }
 
   closeModal() {
+    this.mainService.range= this.radiusmiles;
     this.modalCtrl.dismiss();
   }
 

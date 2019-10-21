@@ -10,7 +10,7 @@ import { NavController } from '@ionic/angular';
 @Injectable()
 export class MainService {
   public user: Observable<Usuario>;
-
+  range:number = 1;
   constructor(private geolocation: Geolocation,
     private fns: AngularFireFunctions,
     private afAuth: AngularFireAuth,
@@ -28,7 +28,7 @@ export class MainService {
   }
 
 
-  encontrarUsuariosCercanos(sport, range) {
+  encontrarUsuariosCercanos(sport) {
 
     return new Promise((resolve, reject) => {
       this.geolocation.getCurrentPosition()
@@ -38,7 +38,7 @@ export class MainService {
             lon: resp.coords.longitude
           }
           const callable = this.fns.httpsCallable('addMessage');
-          let result = callable({ location: location, sport: sport, range: range });
+          let result = callable({ location: location, sport: sport, range: this.range });
           resolve(result.toPromise());
         }).catch((error) => {
           console.log('Error getting location', error);

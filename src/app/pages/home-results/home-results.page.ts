@@ -36,7 +36,7 @@ export class HomeResultsPage {
   }
 
   ngOnInit(): void {
-    this.mainService.encontrarUsuariosCercanos("League of Legends", 5).then((x:any)=>{
+    this.mainService.encontrarUsuariosCercanos("League of Legends").then((x:any)=>{
       this.usuariosMatcheados = x;
       console.log(this.usuariosMatcheados);
       
@@ -53,6 +53,12 @@ export class HomeResultsPage {
   async searchFilter () {
     const modal = await this.modalCtrl.create({
       component: SearchFilterPage
+    });
+    modal.onDidDismiss()
+      .then((data) => {
+        this.mainService.encontrarUsuariosCercanos('').then((x:any)=>{
+      this.usuariosMatcheados = x;
+      console.log(this.usuariosMatcheados)});
     });
     return await modal.present();
   }

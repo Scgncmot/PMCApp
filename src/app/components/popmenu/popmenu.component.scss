@@ -1,4 +1,9 @@
 // Popup Menu //
+:host(){
+    position: fixed;
+    bottom: 5vh;
+    right: 50%;
+}
 .popup-menu-overlay {
     position: fixed;
     top: 0;

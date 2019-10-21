@@ -53,6 +53,7 @@ export class AppComponent {
   }
 
   logout() {
+    this.mainService.signOut();
     this.navCtrl.navigateRoot('/');
   }
 

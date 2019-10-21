@@ -6,7 +6,7 @@
         </ion-button>
     </ion-buttons>
     <ion-title>
-    	Search Filter
+    	Filtrar Busqueda
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -17,13 +17,13 @@
 
 	<ion-item>
 	  <ion-label class="no-margin-bottom" stacked>
-      <ion-text color="dark" class="fw500">Radius:</ion-text>
+      <ion-text color="dark" class="fw500">Radio en Kilometros:</ion-text>
     </ion-label>
-    <ion-range min="1" max="50" step="1" value="1" class="no-padding-top" [(ngModel)]="radiusmiles">
-      <ion-label slot="start"><ion-text color="primary"> {{radiusmiles}} Mile(s)</ion-text></ion-label>
+    <ion-range min="1" max="10" step="1" value="1" class="no-padding-top" [(ngModel)]="radiusmiles">
+      <ion-label slot="start"><ion-text color="primary"> {{radiusmiles}} Kilometros</ion-text></ion-label>
     </ion-range>
 	</ion-item>
 
 
-	<ion-button expand="full" color="primary" (click)="closeModal()">Filter Results</ion-button>
+	<ion-button expand="full" color="primary" (click)="closeModal()">Filtrar Usuarios</ion-button>
 </ion-content>
