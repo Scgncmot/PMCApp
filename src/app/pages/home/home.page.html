@@ -14,19 +14,18 @@
 
 <ion-content>
 
-    <ion-card class="bg-white" *ngFor="let usuario of usuariosMatcheados  ">
-        <ion-img [src]="usuario.imagen"></ion-img>
-        <ion-button expand="full" color="dark" (click)="presentImage(usuario.imagen)" no-margin>
-          {{usuario.nombre}} -- {{usuario.username}}
-        </ion-button>
-      </ion-card>
-    
-    
-      
-      <popmenu (click)="searchFilter()" ></popmenu>
-
+  <div align = "center"> 
+  <ion-text color="secondary"> <h1> <b>NOTICIAS</b></h1> </ion-text>
+</div>
 
   <ion-card class="bg-white">
+    <ion-img src="../assets/img/noticia.jpg"></ion-img>
+
+    <ion-button expand="full" color="dark" no-margin>
+      AQUI VAN LAS NOTICIAS
+    </ion-button>
   </ion-card>
+
+  
 </ion-content>
   

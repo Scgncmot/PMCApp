@@ -33,6 +33,7 @@ export class RegisterPage implements OnInit {
     }
   ];
   usuario={
+    uid:'',
     imagen: "https://e3.365dm.com/17/03/768x432/f4ffaee815e1ab68cd8bc65e34a2ff3279492ae302b43175ae947040584cabd3_3920762.jpg?bypass-service-worker&20170331215749",
     nombre:"",
     email:"",
@@ -65,7 +66,10 @@ export class RegisterPage implements OnInit {
         this.usuario.deportes.push(deporte.nombre)
     })
     this.maninService.register(this.usuario.email, this.usuario.password).then(x=>{
-        this.maninService.crearUsuario(this.usuario, x.user.uid).then(x=>{
+
+        this.usuario.uid = x.user.uid;
+
+        this.maninService.crearUsuario(this.usuario).then(x=>{
             this.navCtrl.navigateRoot('/home-results')
         })
     })

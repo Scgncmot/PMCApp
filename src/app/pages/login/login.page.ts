@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController, MenuController, ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { MainService } from 'src/app/services/main.service';
+import { Usuario } from 'src/app/interfaces/usuario';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,9 @@ import { MainService } from 'src/app/services/main.service';
 })
 export class LoginPage implements OnInit {
   public onLoginForm: FormGroup;
+
+  public loggedEmail: string;
+
   login= {
     email:'',
     password:''
@@ -42,7 +46,7 @@ export class LoginPage implements OnInit {
 
   goToHome() {
     this.mainService.login(this.login.email, this.login.password).then(
-      ()=>this.navCtrl.navigateRoot('/home-results')
+      ()=> this.navCtrl.navigateRoot('/home')
     ).catch(err=>{
       alert("El login falló");
     })

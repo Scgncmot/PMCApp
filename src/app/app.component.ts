@@ -26,15 +26,27 @@ export class AppComponent {
     this.appPages = [
       {
         title: 'Inicio',
-        url: '/home-results',
+        url: '/home',
         direct: 'root',
         icon: 'home'
       },
       {
-        title: 'sports',
+        title: 'Sports',
         url: '/about',
         direct: 'forward',
-        icon: 'apps'
+        icon: 'information-circle'
+      },
+      {
+        title: 'Matches',
+        url: '/settings',
+        direct: 'forward',
+        icon: 'chatboxes'
+      },
+      {
+        title: 'Chats',
+        url: '/chatlist',
+        direct: 'forward',
+        icon: 'chatboxes'
       }
     ];
 

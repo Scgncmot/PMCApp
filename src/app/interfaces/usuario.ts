@@ -1,4 +1,6 @@
 export class Usuario{
+
+    uid?:string 
     nombre?:string
     username?:string
     email?:string

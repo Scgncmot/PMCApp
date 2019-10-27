@@ -6,8 +6,11 @@ const routes: Routes = [
   { path: 'register', loadChildren: './pages/register/register.module#RegisterPageModule' },
   { path: 'about', loadChildren: './pages/about/about.module#AboutPageModule' },
   { path: 'settings', loadChildren: './pages/settings/settings.module#SettingsPageModule' },
+  { path: 'home', loadChildren: './pages/home/home.module#HomePageModule' },
   { path: 'edit-profile', loadChildren: './pages/edit-profile/edit-profile.module#EditProfilePageModule' },
   { path: 'home-results', loadChildren: './pages/home-results/home-results.module#HomeResultsPageModule' },
+  { path: 'chatlist', loadChildren: './pages/chatlist/chatlist.module#ChatlistPageModule' },
+  { path: 'chat', loadChildren: './pages/chat/chat.module#ChatPageModule' },
 ];
 
 @NgModule({

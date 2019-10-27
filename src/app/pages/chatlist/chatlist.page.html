@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Chats</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-list *ngFor = "let chat of chats">
+
+    <ion-item>
+
+        <ion-avatar slot="start">
+
+          <ion-img [src] = "chat.usuario2.imagen"> </ion-img>
+
+        </ion-avatar>
+
+        <ion-label>
+          <h2> {{chat.usuario2.nombre}} </h2>
+        </ion-label>     
+
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>
