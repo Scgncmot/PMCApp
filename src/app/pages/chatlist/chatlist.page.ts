@@ -22,7 +22,7 @@ import { Chat } from 'src/app/interfaces/chat';
 })
 export class ChatlistPage {
 
-  chats: Chat[] = [];
+  chats = [];
 
   constructor(
     public navCtrl: NavController,
