@@ -44,4 +44,8 @@ export class ChatlistPage {
 
   }
 
+  ionViewWillEnter() {
+    this.menuCtrl.enable(true);
+  }
+
 }
