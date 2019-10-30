@@ -6,8 +6,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { SettingsPage } from './settings.page';
 
-import { PopmenuComponent } from './../../components/popmenu/popmenu.component';
-
 
 const routes: Routes = [
   {
@@ -23,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [SettingsPage, PopmenuComponent]
+  declarations: [SettingsPage]
 })
 export class SettingsPageModule {}
