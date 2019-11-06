@@ -94,23 +94,8 @@ export class ChatlistPage {
     this.navCtrl.navigateForward('/chat');    
 
   }
+ 
 
-
-
-  async createAlert() {
-
-      const alert = await this.alertCtrl.create({
-        header: 'Alert',
-        subHeader: 'Subtitle',
-        message: 'This is an alert message.',
-        buttons: ['OK']
-      });
-  }
-
-  getDate(){
-
-    alert("Reserva realizada con éxito");
-  }
 
 
   ionViewWillEnter() {

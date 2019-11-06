@@ -38,6 +38,14 @@ export class ChatPage {
   ngOnInit() {
   }
 
+  getDate(){
+
+    alert("Reserva realizada con éxito");
+
+    this.navCtrl.navigateForward('/chatlist');    
+
+  }
+
   ionViewWillEnter() {
     this.menuCtrl.enable(true);
   }
