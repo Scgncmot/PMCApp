@@ -3,11 +3,14 @@ import { AngularFireFunctions } from '@angular/fire/functions';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Observable, of } from 'rxjs';
+import { Observable, combineLatest, of, from } from 'rxjs';
 import { switchMap, first, map } from 'rxjs/operators';
 import { Usuario } from '../interfaces/usuario';
 import { NavController } from '@ionic/angular';
 import { resolve, reject, async } from 'q';
+import { firestore } from 'firebase/app';
+import { Chat } from '../interfaces/chat';
+
 
 @Injectable()
 export class MainService {
@@ -33,67 +36,113 @@ export class MainService {
   }
 
 
-  iniciarchat(chat, uid){
 
-    return new Promise((resolve, reject)  => {
+  getChats() {
+    return this.afs
+      .collection<any>('chats')
+      .valueChanges();
+  }
 
-      resolve(this.afs.doc(`chats/${uid}`).set(chat));
 
-    }).catch((error) => {
-      console.log('Error creating chat', error);
-
-      reject(error);
-    })
+  getUser() {
+    return this.user.pipe(first()).toPromise();
   }
 
 
 
-  obtenerCurrentUserId(username) {
+  async createChat(userId) {
 
-    return new Promise ((resolve, reject) => {
+    const idChat = this.afs.createId();
 
-      const callable = this.fns.httpsCallable('darChatsUsuario');
+    const datos = await this.user.pipe(first()).toPromise();
 
-      let result = callable({});
-
-      resolve(result.toPromise());
-
-    }).catch((error) => {
-
-      console.log("Error finding user id");
-
-      reject(error);
-
-    })
-
+    const data = {
+      idChat,
+      mensajes: [],
+      usuario: [datos.uid, userId]
+    }
+    
+    this.afs.collection('chats').doc(idChat).set(data);
   }
 
 
+  getChat(chatId) {
+    return this.afs
+      .collection<any>('chats')
+      .doc(chatId)
+      .snapshotChanges()
+      .pipe(
+        map(doc => {
+          return { id: doc.payload.id, ...doc.payload.data() };
+        })
+      );
+  }
 
-  darChatsUsuario() {
 
-    return new Promise((resolve,reject) => {
-
-      const callable = this.fns.httpsCallable('darChatsUsuario');
-
-      this.user.subscribe((u) => {
-
-        console.log(u.username);
-
-        let result = callable({username: u.username});
-
-        resolve(result.toPromise());
-
+  async sendMessage(chatId, content) {
+    const datos = await this.user.pipe(first()).toPromise();
+    if (datos.uid) {
+        const callable = this.fns.httpsCallable('chat');
+        let data$ = callable({ id: chatId, mensajes: [{ text: content }] });
+        data$.subscribe(x => {
+          console.log(x);
+        })
+      }
+      const ref = this.afs.collection('chats').doc(chatId);
+      return ref.update({
+        mensajes: firestore.FieldValue.arrayUnion(content)
       });
+    }
 
-    }).catch((error) => {
+    getUserDataJoin(chat: Chat, idActual: string) {
 
-      console.log("Error finding chats");
+      const uids = Array.from(new Set(chat.usuario));
 
-      reject(error);
+      const userDocs = uids.map(u =>
+        this.afs.doc(`usuarios/${u}`).valueChanges()
+      );   
+      
+      return userDocs;
 
-    })
-  }
+    }
+
+
+
+    /**
+     *    joinUsers2(chat$: Observable<any>) {
+      
+      let chat;
+      const joinKeys = {};
+  
+      return chat$.pipe(
+        switchMap((c: Chat) => {
+          // Unique User IDs
+          chat = c;
+          const uids = Array.from(new Set(c.usuario));
+  
+          // Firestore User Doc Reads
+          const userDocs = uids.map(u =>
+            this.afs.doc('usuarios/${u}').valueChanges()
+          );
+  
+          return userDocs.length ? combineLatest(userDocs) : of([]);
+        }),
+        map(arr => {
+          arr.forEach(v => (joinKeys[(<any> v).uid] = v));
+          chat.mensajes = chat.mensajes.map(v => {
+            
+            return { ...v, user: joinKeys[v.idSender] };
+          });
+          chat.users = []
+          chat.usuario.forEach((element,i,arr) => {
+            chat.users[i] = joinKeys[element];
+          });
+
+          return chat;
+        })
+      );
+    }  
+     */
 
   encontrarUsuariosCercanos(sport) {
 

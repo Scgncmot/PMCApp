@@ -43,7 +43,6 @@ import { AngularFireStorageModule } from "@angular/fire/storage";
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAuthModule,
-  
   ],
   entryComponents: [NotificationsComponent],
   providers: [

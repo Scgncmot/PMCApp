@@ -1,3 +1,5 @@
+import {Chat} from './chat';
+
 export class Usuario{
 
     uid?:string 
@@ -10,4 +12,6 @@ export class Usuario{
         lon:string
     }
     imagen?:string
+
+    chats?: string[];
 }

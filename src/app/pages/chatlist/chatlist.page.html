@@ -11,19 +11,35 @@
 
   <ion-list >
 
-    <ion-item>
+    <ion-item *ngFor = "let chat of chatslistica  ">
 
         <ion-avatar slot="start">
 
-          <ion-img [src] = ""> </ion-img>
+          <ng-container>
+
+            <img [src]="chat.users.imagen">
+
+          </ng-container>
 
         </ion-avatar>
 
         <ion-label>
 
-          <h2> Santiago Carrero </h2>
+            <h2>
+                <span>{{chat.users.nombre}}</span>
+            </h2>
 
-        </ion-label>     
+            
+
+            <p *ngIf="chat.chatob.mensajes[chat.chatob.mensajes.length-1]">
+              
+              {{chat.chatob.mensajes[chat.chatob.mensajes.length-1]}}
+            
+            </p>
+
+        </ion-label> 
+
+        <ion-button shape="round" fill="outline" (click)="goToReserva()">Reservar</ion-button>
 
     </ion-item>
 

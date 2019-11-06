@@ -1,9 +1,64 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>chat</ion-title>
-  </ion-toolbar>
-</ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>Reservas</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
 <ion-content padding>
+
+  <ion-select placeholder = "Seleccione un deporte">
+      <ion-select-option value="lol">League of Legends</ion-select-option>
+      <ion-select-option value="squash">Squash</ion-select-option>
+      <ion-select-option value="swim">Natacion</ion-select-option>
+      <ion-select-option value="fut">Futbol</ion-select-option>
+  </ion-select>
+
+  <ng-container>          .</ng-container>
+
+
+  <ion-item>
+  <ion-label>FECHA: </ion-label>
+
+<ion-datetime displayFormat="YYYY-MM-DD HH:mm" value = "2019-11-06 18:03"></ion-datetime>
+
+  </ion-item>
+
+
+  <ng-container>          .</ng-container>
+
+
+
+  <ion-card>
+    
+      <ion-card-content>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bf/Colsubsidio_logo.svg/1280px-Colsubsidio_logo.svg.png">
+        <ng-container>          .</ng-container>
+
+        <div align = "center" ><ion-checkbox></ion-checkbox></div>
+     
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+
+      
+        <ion-card-content>
+          <img src="https://corporativo.compensar.com/eventos/PublishingImages/logo.png">
+
+          <ng-container>          .</ng-container>
+
+          <div align = "center" ><ion-checkbox></ion-checkbox></div>
+       
+        </ion-card-content>
+      </ion-card>
+
+      <ng-container>          .</ng-container>
+
+      <div align = "center">
+      <ion-button no-margin > RESERVAR!</ion-button>  
+    </div>  
 
 </ion-content>

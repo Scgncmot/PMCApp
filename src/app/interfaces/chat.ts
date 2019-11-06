@@ -2,10 +2,10 @@ import {Usuario} from './usuario';
 
 export class Chat {
 
-    usuario1: Usuario;
+    uid?: string;
 
-    usuario2: Usuario;
+    usuario?: string[];
 
-    chats: string[];
+    chats?: string[];
 
 }

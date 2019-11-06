@@ -14,6 +14,11 @@ import { ImagePage } from './../modal/image/image.page';
 import { NotificationsComponent } from './../../components/notifications/notifications.component';
 import { MainService } from 'src/app/services/main.service';
 import { Chat } from 'src/app/interfaces/chat';
+import { Router } from '@angular/router';
+import { Usuario } from 'src/app/interfaces/usuario';
+import { pluck, map } from 'rxjs/operators';
+
+
 
 @Component({
   selector: 'app-chatlist',
@@ -22,7 +27,9 @@ import { Chat } from 'src/app/interfaces/chat';
 })
 export class ChatlistPage {
 
-  chats = [];
+  chatslistica = [];
+
+  usuarioId: string;
 
   constructor(
     public navCtrl: NavController,
@@ -31,18 +38,80 @@ export class ChatlistPage {
     public alertCtrl: AlertController,
     public modalCtrl: ModalController,
     public toastCtrl: ToastController,
-    public mainService: MainService
-  ) {}
+    public mainService: MainService, private router:Router
+  ) {
+
+
+    this.mainService.getUser().then(usuario => {
+
+      this.usuarioId = usuario.uid;
+
+      this.mainService.getChats().subscribe((chats: Chat[]) => {
+
+        let c =  chats.filter((chat: Chat) => {
+
+          if(chat.usuario.find(x => {return x == this.usuarioId})){
+
+            return chat; 
+          }
+
+        })      
+
+       c.forEach((c: Chat) => {
+
+           this.mainService.getUserDataJoin(c, this.usuarioId).forEach(x => {
+            
+            x.subscribe((el: Usuario) => {
+
+              if(el.uid != this.usuarioId) {
+
+                let obj = {chatob: c, users: el};
+
+                this.chatslistica.push(obj);
+              }
+
+              
+
+            });
+
+           })      
+        }) 
+
+        console.log(this.chatslistica);
+
+      })
+
+    })
+  }
 
   ngOnInit(): void {
 
-    this.mainService.darChatsUsuario().then((x:any) => {
+  }
 
-      console.log(x);
 
-    })
+  goToReserva() {
+
+    this.navCtrl.navigateForward('/chat');    
 
   }
+
+
+
+  async createAlert() {
+
+      const alert = await this.alertCtrl.create({
+        header: 'Alert',
+        subHeader: 'Subtitle',
+        message: 'This is an alert message.',
+        buttons: ['OK']
+      });
+  }
+
+  getDate(){
+
+    alert("Reserva realizada con éxito");
+  }
+
 
   ionViewWillEnter() {
     this.menuCtrl.enable(true);
